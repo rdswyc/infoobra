@@ -1,0 +1,488 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<app siteUrl="https://campestriniinfoobra.sharepoint.com/piacentini/perdoncini">
+
+  <list title="diario" display="Diário" color="FF0050EF">
+    <View name="AllItems">
+      <Query>
+        <OrderBy>
+          <FieldRef Name="Modified" Ascending="FALSE"/>
+        </OrderBy>
+        <Where>
+          <Gt>
+            <FieldRef Name="Modified" />
+            <Value Type="DateTime">{0}</Value>
+          </Gt>
+        </Where>
+      </Query>
+      <RowLimit>{1}</RowLimit>
+      <ViewFields>
+        <FieldRef Name="Title" DisplayName="Registro" Type="Text" Required="True"/>
+        <FieldRef Name="interrupcao" DisplayName="Interrupção" Type="Choice">
+          <Choices>
+            <Choice>-</Choice>
+            <Choice>Falta de Material</Choice>
+            <Choice>Falta de Mão de Obra</Choice>
+            <Choice>Falta de Equipamento</Choice>
+            <Choice>Falta de Projeto</Choice>
+            <Choice>Clima</Choice>
+            <Choice>Outros</Choice>
+          </Choices>
+        </FieldRef>
+        <FieldRef Name="clima" DisplayName="Clima" Type="Choice">
+          <Choices>
+            <Choice>-</Choice>
+            <Choice>Temperatura do ar elevada</Choice>
+            <Choice>Céu Aberto</Choice>
+            <Choice>Céu Nuvens</Choice>
+            <Choice>Nublado</Choice>
+            <Choice>Chuva fraca</Choice>
+            <Choice>Chuvoso</Choice>
+            <Choice>Tempestade</Choice>
+            <Choice>Neve</Choice>
+          </Choices>
+        </FieldRef>
+        <FieldRef Name="incompatibilidade_de_projeto" DisplayName="Incompatibilidade de projeto" Type="Boolean"/>
+        <FieldRef Name="exige_solucao" DisplayName="Exige Solução" Type="Boolean"/>
+        <FieldRef Name="urgente" DisplayName="Urgente" Type="Boolean"/>
+        <FieldRef Name="resolvido" DisplayName="Resolvido" Type="Boolean" />
+        <FieldRef Name="edificacao" DisplayName="Edificação" Type="Lookup" List="edificacao" ShowField="Title"/>
+        <FieldRef Name="bloco" DisplayName="Bloco" Type="Lookup" List="bloco" ShowField="Title"/>
+        <FieldRef Name="eap_operacional" DisplayName="EAP Operacional" Type="Lookup" List="eap" ShowField="Title"/>
+        <FieldRef Name="eap_tatica" DisplayName="EAP Tática" Type="Lookup" List="eap" ShowField="tatica"/>
+        <FieldRef Name="eap_estrategica" DisplayName="EAP Estratégica" Type="Lookup" List="eap" ShowField="estrategica"/>
+        <FieldRef Name="solucao" DisplayName="Solução" Type="Note" />
+        <FieldRef Name="alterado_app" DisplayName="Usuário" Type="Lookup" List="usuario" ShowField="Title"/>
+        <FieldRef Name="Modified" DisplayName="Modificado" Type="DateTime"/>
+        <FieldRef Name="Attachments" DisplayName="Anexos" Type="Attachments"/>
+      </ViewFields>
+    </View>
+  </list>
+
+  <list title="solicitacao" display="Solicitação" color="FF008A00">
+    <View name="AllItems">
+      <Query>
+        <OrderBy>
+          <FieldRef Name="Modified" Ascending="FALSE"/>
+        </OrderBy>
+        <Where>
+          <Gt>
+            <FieldRef Name="Modified" />
+            <Value Type="DateTime">{0}</Value>
+          </Gt>
+        </Where>
+      </Query>
+      <RowLimit>{1}</RowLimit>
+      <ViewFields>
+        <FieldRef Name="Title" DisplayName="Item Solicitado" Type="Text" Required="True"/>
+        <FieldRef Name="tipo_solicitacao" DisplayName="Tipo de solicitação" Type="Choice">
+          <Choices>
+            <Choice>-</Choice>
+            <Choice>Material</Choice>
+            <Choice>Informação</Choice>
+            <Choice>Mão de Obra</Choice>
+            <Choice>Equipamentos</Choice>
+            <Choice>Projetos</Choice>
+            <Choice>Outros</Choice>
+          </Choices>
+        </FieldRef>
+        <FieldRef Name="urgente" DisplayName="Urgente" Type="Boolean"/>
+        <FieldRef Name="aprovado" DisplayName="Aprovado" Type="Boolean"/>
+        <FieldRef Name="entregue" DisplayName="Comprado" Type="Boolean"/>
+        <FieldRef Name="previsaochegada" DisplayName="Previsão de chegada" Type="Date"/>
+        <FieldRef Name="edificacao" DisplayName="Edificação" Type="Lookup" List="edificacao" ShowField="Title"/>
+        <FieldRef Name="bloco" DisplayName="Bloco" Type="Lookup" List="bloco" ShowField="Title"/>
+        <FieldRef Name="eap_operacional" DisplayName="EAP Operacional" Type="Lookup" List="eap" ShowField="Title"/>
+        <FieldRef Name="eap_tatica" DisplayName="EAP Tática" Type="Lookup" List="eap" ShowField="tatica"/>
+        <FieldRef Name="eap_estrategica" DisplayName="EAP Estratégica" Type="Lookup" List="eap" ShowField="estrategica"/>
+        <FieldRef Name="recebido" DisplayName="Recebido" Type="Boolean"/>
+        <FieldRef Name="alterado_app" DisplayName="Usuário" Type="Lookup" List="usuario" ShowField="Title"/>
+        <FieldRef Name="Modified" DisplayName="Modificado" Type="DateTime"/>
+        <FieldRef Name="Attachments" DisplayName="Anexos" Type="Attachments"/>
+      </ViewFields>
+    </View>
+  </list>
+
+  <list title="produtividade" display="Produtividade" color="FFE51400">
+    <View name="AllItems">
+      <Query>
+        <OrderBy>
+          <FieldRef Name="Modified" Ascending="FALSE"/>
+        </OrderBy>
+        <Where>
+          <Gt>
+            <FieldRef Name="Modified" />
+            <Value Type="DateTime">{0}</Value>
+          </Gt>
+        </Where>
+      </Query>
+      <RowLimit>{1}</RowLimit>
+      <ViewFields>
+        <FieldRef Name="Title" DisplayName="Tarefa em execução" Type="Text" Required="True" />
+        <FieldRef Name="oficiais" DisplayName="Oficial" Type="Lookup" List="oficiais" ShowField="Title"/>
+        <FieldRef Name="quantidade_oficial" DisplayName="Quantidade de oficial" Type="Number"/>
+        <FieldRef Name="meio_oficiais" DisplayName="Meio Oficial" Type="Lookup" List="meio_oficiais" ShowField="Title"/>
+        <FieldRef Name="quantidade_meio_oficial" DisplayName="Quantidade de meio oficial" Type="Number"/>
+        <FieldRef Name="edificacao" DisplayName="Edificação" Type="Lookup" List="edificacao" ShowField="Title"/>
+        <FieldRef Name="bloco" DisplayName="Bloco" Type="Lookup" List="bloco" ShowField="Title"/>
+        <FieldRef Name="eap_operacional" DisplayName="EAP Operacional" Type="Lookup" List="eap" ShowField="Title"/>
+        <FieldRef Name="eap_tatica" DisplayName="EAP Tática" Type="Lookup" List="eap" ShowField="tatica"/>
+        <FieldRef Name="eap_estrategica" DisplayName="EAP Estratégica" Type="Lookup" List="eap" ShowField="estrategica"/>
+        <FieldRef Name="alterado_app" DisplayName="Usuário" Type="Lookup" List="usuario" ShowField="Title"/>
+        <FieldRef Name="Modified" DisplayName="Modificado" Type="DateTime"/>
+        <FieldRef Name="Attachments" DisplayName="Anexos" Type="Attachments"/>
+      </ViewFields>
+    </View>
+  </list>
+
+  <list title="planejamento_operacional" display="Planejamento Operacional" color="FFE3C800">
+    <View name="AllItems">
+      <Query>
+        <OrderBy>
+          <FieldRef Name="Modified" Ascending="FALSE"/>
+        </OrderBy>
+        <Where>
+          <Gt>
+            <FieldRef Name="Modified" />
+            <Value Type="DateTime">{0}</Value>
+          </Gt>
+        </Where>
+      </Query>
+      <RowLimit>{1}</RowLimit>
+      <ViewFields>
+        <FieldRef Name="Title" DisplayName="Tarefa" Type="Text" Required="True"/>
+        <FieldRef Name="frente" DisplayName="Frente" Type="Choice">
+          <Choices>
+            <Choice>-</Choice>
+            <Choice>Frente 01</Choice>
+            <Choice>Frente 02</Choice>
+          </Choices>
+        </FieldRef>
+        <FieldRef Name="inicio_planejado" DisplayName="Início planejado" Type="Week"/>
+        <FieldRef Name="executado" DisplayName="Executado" Type="Boolean"/>
+        <FieldRef Name="motivo_nao_executado" DisplayName="Motivo para não executado" Type="Choice">
+          <Choices>
+            <Choice>-</Choice>
+            <Choice>Planejamento errado</Choice>
+            <Choice>Execução</Choice>
+            <Choice>Reprogramação</Choice>
+            <Choice>Atividades anteriores não realizadas</Choice>
+            <Choice>Empreiteiro</Choice>
+            <Choice>Mão-de-obra</Choice>
+            <Choice>Material</Choice>
+            <Choice>Equipamento</Choice>
+            <Choice>Clima</Choice>
+            <Choice>Projeto</Choice>
+            <Choice>Informação</Choice>
+            <Choice>Greve</Choice>
+            <Choice>Contrato</Choice>
+            <Choice>Outros</Choice>
+          </Choices>
+        </FieldRef>
+        <FieldRef Name="novo_inicio_planejado" DisplayName="Novo início planejado" Type="Week"/>
+        <FieldRef Name="edificacao" DisplayName="Edificação" Type="Lookup" List="edificacao" ShowField="Title"/>
+        <FieldRef Name="eap_operacional" DisplayName="EAP Operacional" Type="Lookup" List="eap" ShowField="Title"/>
+        <FieldRef Name="eap_tatica" DisplayName="EAP Tática" Type="Lookup" List="eap" ShowField="tatica"/>
+        <FieldRef Name="eap_estrategica" DisplayName="EAP Estratégica" Type="Lookup" List="eap" ShowField="estrategica"/>
+        <FieldRef Name="alterado_app" DisplayName="Usuário" Type="Lookup" List="usuario" ShowField="Title"/>
+        <FieldRef Name="Modified" DisplayName="Modificado" Type="DateTime"/>
+        <FieldRef Name="Attachments" DisplayName="Anexos" Type="Attachments"/>
+      </ViewFields>
+    </View>
+  </list>
+
+  <list title="restricoes" display="Restrições" color="FFAA00FF">
+    <View name="AllItems">
+      <Query>
+        <OrderBy>
+          <FieldRef Name="Modified" Ascending="FALSE"/>
+        </OrderBy>
+        <Where>
+          <Gt>
+            <FieldRef Name="Modified" />
+            <Value Type="DateTime">{0}</Value>
+          </Gt>
+        </Where>
+      </Query>
+      <RowLimit>{1}</RowLimit>
+      <ViewFields>
+        <FieldRef Name="Title" DisplayName="Tarefa" Type="Text" Required="True"/>
+        <FieldRef Name="restricao_eliminada" DisplayName="Restrição eliminada" Type="Boolean"/>
+        <FieldRef Name="tarefa_planejada" DisplayName="Tarefa Planejada" Type="Lookup" List="planejamento_operacional" ShowField="Title"/>
+        <FieldRef Name="equipes" DisplayName="Equipe" Type="Lookup" List="equipes" ShowField="Title"/>
+        <FieldRef Name="alterado_app" DisplayName="Usuário" Type="Lookup" List="usuario" ShowField="Title"/>
+        <FieldRef Name="Modified" DisplayName="Modificado" Type="DateTime"/>
+        <FieldRef Name="Attachments" DisplayName="Anexos" Type="Attachments"/>
+      </ViewFields>
+    </View>
+  </list>
+
+  <list title="qualidade" display="Qualidade" color="FFFA6800">
+    <View name="Reprovados">
+      <Query>
+        <OrderBy>
+          <FieldRef Name="Modified" Ascending="FALSE"/>
+        </OrderBy>
+        <Where>
+          <And>
+            <Or>
+              <Or>
+                <Or>
+                  <Or>
+                    <Or>
+                      <Eq>
+                        <FieldRef Name="res_verificacao_1" />
+                        <Value Type="Text">Reprovado</Value>
+                      </Eq>
+                      <Eq>
+                        <FieldRef Name="res_verificacao_2" />
+                        <Value Type="Text">Reprovado</Value>
+                      </Eq>
+                    </Or>
+                    <Eq>
+                      <FieldRef Name="res_verificacao_3" />
+                      <Value Type="Text">Reprovado</Value>
+                    </Eq>
+                  </Or>
+                  <Eq>
+                    <FieldRef Name="res_verificacao_4" />
+                    <Value Type="Text">Reprovado</Value>
+                  </Eq>
+                </Or>
+                <Eq>
+                  <FieldRef Name="res_verificacao_5" />
+                  <Value Type="Text">Reprovado</Value>
+                </Eq>
+              </Or>
+              <Eq>
+                <FieldRef Name="res_verificacao_6" />
+                <Value Type="Text">Reprovado</Value>
+              </Eq>
+            </Or>
+            <Gt>
+              <FieldRef Name="Modified" />
+              <Value Type="DateTime">{0}</Value>
+            </Gt>
+          </And>
+        </Where>
+      </Query>
+      <RowLimit>{1}</RowLimit>
+      <ViewFields>
+        <FieldRef Name="ficha" DisplayName="Ficha de verificação" Type="Lookup" List="ficha_verificacao" ShowField="Title" Required="True"/>
+        <FieldRef Name="res_verificacao_1" DisplayName="Verificação 1" Type="Choice">
+          <Choices>
+            <Choice>-</Choice>
+            <Choice>Aprovado</Choice>
+            <Choice>Reprovado</Choice>
+            <Choice>Aprovado após inspeção</Choice>
+          </Choices>
+        </FieldRef>
+        <FieldRef Name="res_verificacao_2" DisplayName="Verificação 2" Type="Choice">
+          <Choices>
+            <Choice>-</Choice>
+            <Choice>Aprovado</Choice>
+            <Choice>Reprovado</Choice>
+            <Choice>Aprovado após inspeção</Choice>
+          </Choices>
+        </FieldRef>
+        <FieldRef Name="res_verificacao_3" DisplayName="Verificação 3" Type="Choice">
+          <Choices>
+            <Choice>-</Choice>
+            <Choice>Aprovado</Choice>
+            <Choice>Reprovado</Choice>
+            <Choice>Aprovado após inspeção</Choice>
+          </Choices>
+        </FieldRef>
+        <FieldRef Name="res_verificacao_4" DisplayName="Verificação 4" Type="Choice">
+          <Choices>
+            <Choice>-</Choice>
+            <Choice>Aprovado</Choice>
+            <Choice>Reprovado</Choice>
+            <Choice>Aprovado após inspeção</Choice>
+          </Choices>
+        </FieldRef>
+        <FieldRef Name="res_verificacao_5" DisplayName="Verificação 5" Type="Choice">
+          <Choices>
+            <Choice>-</Choice>
+            <Choice>Aprovado</Choice>
+            <Choice>Reprovado</Choice>
+            <Choice>Aprovado após inspeção</Choice>
+          </Choices>
+        </FieldRef>
+        <FieldRef Name="res_verificacao_6" DisplayName="Verificação 6" Type="Choice">
+          <Choices>
+            <Choice>-</Choice>
+            <Choice>Aprovado</Choice>
+            <Choice>Reprovado</Choice>
+            <Choice>Aprovado após inspeção</Choice>
+          </Choices>
+        </FieldRef>
+        <FieldRef Name="edificacao" DisplayName="Edificação" Type="Lookup" List="edificacao" ShowField="Title"/>
+        <FieldRef Name="bloco" DisplayName="Bloco" Type="Lookup" List="bloco" ShowField="Title"/>
+        <FieldRef Name="local_especifico" DisplayName="Local específico" Type="Text"/>
+        <FieldRef Name="Title" DisplayName="Observações" Type="Note"/>
+        <FieldRef Name="solucao" DisplayName="Solução" Type="Note"/>
+        <FieldRef Name="alterado_app" DisplayName="Usuário" Type="Lookup" List="usuario" ShowField="Title"/>
+        <FieldRef Name="Modified" DisplayName="Modificado" Type="DateTime"/>
+        <FieldRef Name="Attachments" DisplayName="Anexos" Type="Attachments"/>
+      </ViewFields>
+    </View>
+  </list>
+
+  <list title="fale_conosco" display="Fale Conosco" color="FF647687">
+    <View name="AllItems">
+      <Query>
+        <OrderBy>
+          <FieldRef Name="Modified" Ascending="FALSE" />
+        </OrderBy>
+        <Where>
+          <Gt>
+            <FieldRef Name="Modified" />
+            <Value Type="DateTime">{0}</Value>
+          </Gt>
+        </Where>
+      </Query>
+      <RowLimit>{1}</RowLimit>
+      <ViewFields>
+        <FieldRef Name="Title" DisplayName="Registro" Type="Text"/>
+        <FieldRef Name="interrupcao_coleta" DisplayName="Interrupção na coleta" Type="Choice">
+          <Choices>
+            <Choice>Dúvidas no lançamento de dados</Choice>
+            <Choice>Aplicativo</Choice>
+            <Choice>Painel</Choice>
+            <Choice>Outros</Choice>
+          </Choices>
+        </FieldRef>
+        <FieldRef Name="urgente" DisplayName="Urgente" Type="Boolean"/>
+        <FieldRef Name="resolvido" DisplayName="Resolvido" Type="Boolean"/>
+        <FieldRef Name="solucao" DisplayName="Solução" Type="Note"/>
+        <FieldRef Name="alterado_app" DisplayName="Usuário" Type="Lookup" List="usuario" ShowField="Title"/>
+        <FieldRef Name="Modified" DisplayName="Modificado" Type="DateTime"/>
+        <FieldRef Name="Attachments" DisplayName="Anexos" Type="Attachments"/>
+      </ViewFields>
+    </View>
+  </list>
+
+
+  <param title="ficha_verificacao">
+    <View name="AllItems">
+      <Query>
+        <OrderBy>
+          <FieldRef Name="ID" />
+        </OrderBy>
+      </Query>
+      <RowLimit>{1}</RowLimit>
+      <ViewFields>
+        <FieldRef Name="Title" DisplayName="Nome da ficha"/>
+        <FieldRef Name="verificacao_1"/>
+        <FieldRef Name="verificacao_2"/>
+        <FieldRef Name="verificacao_3"/>
+        <FieldRef Name="verificacao_4"/>
+        <FieldRef Name="verificacao_5"/>
+        <FieldRef Name="verificacao_6"/>
+      </ViewFields>
+    </View>
+  </param>
+
+  <param title="edificacao">
+    <View name="AllItems">
+      <Query>
+        <OrderBy>
+          <FieldRef Name="ID" />
+        </OrderBy>
+      </Query>
+      <RowLimit>{1}</RowLimit>
+      <ViewFields>
+        <FieldRef Name="Title" DisplayName="Edificação"/>
+      </ViewFields>
+    </View>
+  </param>
+
+  <param title="bloco">
+    <View name="AllItems">
+      <Query>
+        <OrderBy>
+          <FieldRef Name="ID" />
+        </OrderBy>
+      </Query>
+      <RowLimit>{1}</RowLimit>
+      <ViewFields>
+        <FieldRef Name="Title" DisplayName="Bloco"/>
+      </ViewFields>
+    </View>
+  </param>
+
+  <param title="oficiais">
+    <View name="AllItems">
+      <Query>
+        <OrderBy>
+          <FieldRef Name="ID" />
+        </OrderBy>
+      </Query>
+      <RowLimit>{1}</RowLimit>
+      <ViewFields>
+        <FieldRef Name="Title" DisplayName="Oficiais"/>
+      </ViewFields>
+    </View>
+  </param>
+
+  <param title="meio_oficiais">
+    <View name="AllItems">
+      <Query>
+        <OrderBy>
+          <FieldRef Name="ID" />
+        </OrderBy>
+      </Query>
+      <RowLimit>{1}</RowLimit>
+      <ViewFields>
+        <FieldRef Name="Title" DisplayName="Meio Oficiais"/>
+      </ViewFields>
+    </View>
+  </param>
+
+  <param title="eap">
+    <View name="AllItems">
+      <Query>
+        <OrderBy>
+          <FieldRef Name="ID" />
+        </OrderBy>
+      </Query>
+      <RowLimit>{1}</RowLimit>
+      <ViewFields>
+        <FieldRef Name="Title" DisplayName="Operacional"/>
+        <FieldRef Name="tatica" DisplayName="Tática"/>
+        <FieldRef Name="estrategica" DisplayName="Estratégica"/>
+      </ViewFields>
+    </View>
+  </param>
+
+  <param title="equipes">
+    <View name="AllItems">
+      <Query>
+        <OrderBy>
+          <FieldRef Name="ID" />
+        </OrderBy>
+      </Query>
+      <RowLimit>{1}</RowLimit>
+      <ViewFields>
+        <FieldRef Name="Title" DisplayName="Título"/>
+      </ViewFields>
+    </View>
+  </param>
+
+  <param title="usuario">
+    <View name="AllItems">
+      <Query>
+        <OrderBy>
+          <FieldRef Name="ID" />
+        </OrderBy>
+      </Query>
+      <RowLimit>{1}</RowLimit>
+      <ViewFields>
+        <FieldRef Name="Title" DisplayName="Usuário"/>
+        <FieldRef Name="liberacaoaprovado" DisplayName="Liberação do campo aprovado"/>
+      </ViewFields>
+    </View>
+  </param>
+
+</app>

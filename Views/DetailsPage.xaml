@@ -1,0 +1,122 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="InfoObra.DetailsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    shell:SystemTray.IsVisible="True">
+
+    <toolkit:TransitionService.NavigationInTransition>
+        <toolkit:NavigationInTransition>
+            <toolkit:NavigationInTransition.Forward>
+                <toolkit:TurnstileTransition Mode="ForwardIn" />
+            </toolkit:NavigationInTransition.Forward>
+        </toolkit:NavigationInTransition>
+    </toolkit:TransitionService.NavigationInTransition>
+    <toolkit:TransitionService.NavigationOutTransition>
+        <toolkit:NavigationOutTransition>
+            <toolkit:NavigationOutTransition.Backward>
+                <toolkit:TurnstileFeatherTransition Mode="BackwardOut" />
+            </toolkit:NavigationOutTransition.Backward>
+        </toolkit:NavigationOutTransition>
+    </toolkit:TransitionService.NavigationOutTransition>
+
+    <shell:SystemTray.ProgressIndicator>
+        <shell:ProgressIndicator IsVisible="True" />
+    </shell:SystemTray.ProgressIndicator>
+
+    <Grid Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <ProgressBar
+            Name="Progress"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Width="{Binding ElementName=LayoutRoot, Path=ActualWidth}"
+            Foreground="{StaticResource Brush1}"
+            IsIndeterminate="{Binding IsBusy}"
+            Visibility="{Binding ShowIfBusy}"
+            Margin="0,10,0,0"
+            toolkit:TurnstileFeatherEffect.FeatheringIndex="0"/>
+
+        <TextBlock
+            Name="SaveBlock"
+            Text="{Binding Path=LocalizedResources.Saving, Source={StaticResource LocalizedStrings}, StringFormat='{}{0}...'}"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Margin="0,40,0,0"
+            Visibility="Collapsed"/>
+
+        <ScrollViewer
+            Grid.Row="0"
+            Name="Container"
+            VerticalScrollBarVisibility="Visible">
+            <StackPanel>
+
+                <local:FieldsControl xmlns:local="clr-namespace:InfoObra"/>
+
+                <TextBlock
+                    Text="{Binding DataProvider.ListTitle, Converter={StaticResource FieldLabelConverter}, ConverterParameter=Attachments}"
+                    Style="{StaticResource FieldLabel}"
+                    toolkit:TurnstileFeatherEffect.FeatheringIndex="0"/>
+
+                <Image
+                    Name="imgAttachments"
+                    Source="{Binding Attachment}"
+                    Margin="10"
+                    toolkit:TurnstileFeatherEffect.FeatheringIndex="0"/>
+
+                <ListBox
+                    Name="lstBoxAttachments"
+                    Width="Auto"
+                    toolkit:TurnstileFeatherEffect.FeatheringIndex="0">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <CheckBox FontSize="{StaticResource PhoneFontSizeNormal}" IsChecked="{Binding IsChecked, Mode=TwoWay}" Content="{Binding Name}" />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+                <TextBlock
+                    Style="{StaticResource FeedFooter}"
+                    Margin="10,10,0,20"
+                    toolkit:TurnstileFeatherEffect.FeatheringIndex="0">
+                    <Run Text="{Binding [alterado_app]}" />
+                    <Run Text="{Binding [Modified]}" />
+                </TextBlock>
+
+            </StackPanel>
+        </ScrollViewer>
+
+        <Popup x:Name="Popup" VerticalOffset="575">
+            <StackPanel
+                Background="{StaticResource PhoneChromeBrush}"
+                Height="200" Width="{Binding ActualWidth, ElementName=LayoutRoot}"
+                toolkit:TiltEffect.IsTiltEnabled="True">
+                <ListBoxItem
+                    Content="{Binding Path=LocalizedResources.TakePhoto, Source={StaticResource LocalizedStrings}}"
+                    FontSize="{StaticResource PhoneFontSizeLarge}"
+                    Margin="30,25,0,10"
+                    Tap="TakePhoto_Tap"/>
+                <ListBoxItem
+                    Content="{Binding Path=LocalizedResources.ChooseFile, Source={StaticResource LocalizedStrings}}"
+                    FontSize="{StaticResource PhoneFontSizeLarge}"
+                    Margin="30,20,0,10"
+                    Tap="ChooseFile_Tap"/>
+            </StackPanel>
+        </Popup>
+
+    </Grid>
+
+</phone:PhoneApplicationPage>

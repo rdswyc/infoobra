@@ -1,0 +1,209 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit">
+    
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Microsoft.SharePoint.Phone.Application;component/textboxtemplate.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Color x:Key="ColorTheme1">#FF0092C8</Color>
+    <Color x:Key="ColorTheme2">#FF163683</Color>
+
+    <SolidColorBrush x:Key="Brush1" Color="{StaticResource ColorTheme1}" />
+    <SolidColorBrush x:Key="Brush2" Color="{StaticResource ColorTheme2}" />
+
+    <ControlTemplate x:Key="PhoneDisabledTextBoxTemplate" TargetType="TextBox">
+        <ContentControl x:Name="ContentElement"
+                    BorderThickness="0"
+                    HorizontalContentAlignment="Stretch"
+                    Margin="{StaticResource PhoneTextBoxInnerMargin}"
+                    Padding="{TemplateBinding Padding}"
+                    VerticalContentAlignment="Stretch"/>
+    </ControlTemplate>
+
+    <Style x:Key="PickerItem" TargetType="ListBoxItem">
+        <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeLarge}" />
+        <Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilyLight}" />
+        <Setter Property="Margin" Value="0,5,0,5" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    <Border x:Name="LayoutRoot" Background="{TemplateBinding Background}" HorizontalAlignment="{TemplateBinding HorizontalAlignment}" VerticalAlignment="{TemplateBinding VerticalAlignment}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="SelectionStates">
+                                <VisualState x:Name="Unselected"/>
+                                <VisualState x:Name="Selected">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentContainer" Storyboard.TargetProperty="Foreground">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource Brush1}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <ContentControl x:Name="ContentContainer" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Foreground="{TemplateBinding Foreground}" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="UserPick" TargetType="ListBox">
+        <Setter Property="Margin" Value="24,20,24,30" />
+        <Setter Property="MaxHeight" Value="525" />
+        <Setter Property="toolkit:TiltEffect.IsTiltEnabled" Value="True" />
+        <Setter Property="ItemContainerStyle" Value="{StaticResource PickerItem}" />
+    </Style>
+
+    <Style x:Key="FeedItem" TargetType="StackPanel">
+        <Setter Property="Margin" Value="0,0,0,30" />
+        <Setter Property="Width" Value="410" />
+    </Style>
+
+    <Style x:Key="FeedTitle" TargetType="TextBlock"
+            BasedOn="{StaticResource PhoneTextTitle3Style}">
+        <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+
+    <Style x:Key="FeedDetail" TargetType="TextBlock"
+            BasedOn="{StaticResource PhoneTextNormalStyle}">
+        <Setter Property="TextWrapping" Value="NoWrap" />
+    </Style>
+
+    <Style x:Key="FeedImage" TargetType="Image">
+        <Setter Property="Stretch" Value="None" />
+        <Setter Property="MaxHeight" Value="350" />
+        <Setter Property="Margin" Value="10,3,0,1" />
+    </Style>
+
+    <Style x:Key="FeedFooter" TargetType="TextBlock"
+            BasedOn="{StaticResource PhoneTextSubtleStyle}">
+        <Setter Property="TextWrapping" Value="NoWrap" />
+    </Style>
+
+    <Style x:Key="JumpList" TargetType="phone:LongListSelector">
+        <Setter Property="LayoutMode" Value="List" />
+        <Setter Property="Margin" Value="12,12,0,0"/>
+        <Setter Property="toolkit:TiltEffect.IsTiltEnabled" Value="True" />
+    </Style>
+
+    <Style x:Key="Checked" TargetType="CheckBox">
+        <Setter Property="IsThreeState" Value="False" />
+        <Setter Property="IsHitTestVisible" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="CheckBox">
+                    <Grid Background="Transparent">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CheckStates">
+                                <VisualState x:Name="Checked">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="CheckMark">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Visible</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Unchecked"/>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <TextBlock
+                            x:Name="CheckMark"
+                            Text="✓"
+                            FontWeight="Bold"
+                            Foreground="{Binding List.ColorBrush}"
+                            FontSize="{StaticResource PhoneFontSizeLarge}"
+                            IsHitTestVisible="False"
+                            Visibility="Collapsed"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="Urgent" TargetType="CheckBox">
+        <Setter Property="IsThreeState" Value="False" />
+        <Setter Property="IsHitTestVisible" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="CheckBox">
+                    <Grid Background="Transparent">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CheckStates">
+                                <VisualState x:Name="Checked">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="CheckMark">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Visible</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Unchecked"/>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <TextBlock
+                            x:Name="CheckMark"
+                            Text="!"
+                            FontWeight="Bold"
+                            Foreground="{Binding List.ColorBrush}"
+                            FontSize="{StaticResource PhoneFontSizeLarge}"
+                            IsHitTestVisible="False"
+                            Visibility="Collapsed" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="FieldLabel" TargetType="TextBlock"
+        BasedOn="{StaticResource PhoneTextTitle3Style}">
+        <Setter Property="Margin" Value="10,10,0,0" />
+        <Setter Property="TextWrapping" Value="NoWrap" />
+    </Style>
+
+    <Style x:Key="FieldText" TargetType="TextBox"
+            BasedOn="{StaticResource TextValidationTemplate}">
+        <Setter Property="Height" Value="Auto" />
+        <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeNormal}" />
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="InputScope" Value="Text" />
+    </Style>
+
+    <Style x:Key="FieldNumber" TargetType="TextBox"
+            BasedOn="{StaticResource FieldText}">
+        <Setter Property="InputScope" Value="Number" />
+    </Style>
+
+    <Style x:Key="FieldWeek" TargetType="TextBox"
+            BasedOn="{StaticResource FieldText}">
+        <Setter Property="InputScope" Value="Time" />
+    </Style>
+
+    <Style x:Key="FieldNote" TargetType="TextBox">
+        <Setter Property="Height" Value="216" />
+        <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeNormal}" />
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="InputScope" Value="Text" />
+    </Style>
+    
+    <Style x:Key="FullModeItemStyle" TargetType="ListBoxItem">
+        <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeLarge}" />
+        <Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilyLight}" />
+        <Setter Property="Margin" Value="0,5,0,5" />
+    </Style>
+
+    <Style x:Key="Link" TargetType="HyperlinkButton">
+        <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeLarge}" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="Margin" Value="0,50,0,0" />
+    </Style>
+
+</ResourceDictionary>

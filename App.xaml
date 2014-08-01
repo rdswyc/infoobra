@@ -1,0 +1,42 @@
+﻿<Application
+    x:Class="InfoObra.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:helpers="clr-namespace:InfoObra.Helpers"
+    xmlns:res="clr-namespace:InfoObra.Resources"
+    xmlns:info="clr-namespace:InfoObra.Services">
+
+    <!--Application Resources-->
+    <Application.Resources>
+        <ResourceDictionary>
+
+            <sys:String x:Key="AppName">InfoObra</sys:String>
+            <sys:String x:Key="Publisher">Campestrini Tecnologia</sys:String>
+            <sys:String x:Key="AboutUrl">http://www.infoobra.com.br</sys:String>
+
+            <info:AppInfo x:Key="AppInfo"/>
+            <res:LocalizedStrings x:Key="LocalizedStrings"/>
+            <helpers:ToUpperValueConverter x:Key="ToUpper"/>
+            <helpers:ToLowerValueConverter x:Key="ToLower"/>
+            <helpers:FieldValueConverter x:Key="FieldLabelConverter"/>
+            <toolkit:RelativeTimeConverter x:Key="TimeConverter" />
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Views/Themes.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+        </ResourceDictionary>
+    </Application.Resources>
+
+    <Application.ApplicationLifetimeObjects>
+        <!--Required object that handles lifetime events for the application-->
+        <shell:PhoneApplicationService
+            Launching="Application_Launching" Closing="Application_Closing"
+            Activated="Application_Activated" Deactivated="Application_Deactivated"/>
+    </Application.ApplicationLifetimeObjects>
+
+</Application>
